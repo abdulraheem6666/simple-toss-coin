@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toss - Coin</title>
+    <style>
+        body{
+            background-color: rgb(219, 136, 27);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            height: 100vh;
+        }
+        .container{
+            width: 350px;
+            height: fit-content;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-color: #ffffff;
+            padding: 20px 0px;
+        }
+        #flipbtn{
+            width: 120px;
+            height: 45px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgb(219, 136, 27);
+            color: white;
+            transition: background-color 0.7s ease-in;
+            border: 1px solid rgb(219, 136, 27);
+        }
+        #flipbtn:hover{
+            background-color: white;
+            color: rgb(219, 136, 27);
+        }
+        #res{
+            width: 120px;
+            height: 45px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          color: rgb(219, 136, 27);
+            background-color: white;
+            transition: background-color 0.7s ease-in;
+            border: 1px solid rgb(219, 136, 27);
+        }
+        #res:hover{
+           color: white;
+            background-color: rgb(219, 136, 27);
+        }
+        #coin{
+            width: 150px;
+            height: 150px;
+        }
+        .btn-con{
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 80%;
+        }
+        .myanime{
+            animation: myanime 1s;
+        }
+        @keyframes myanime {
+            30%{
+                transform: scale(1.2);
+            }
+        }
+        .myendresult{
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 80%;
+        }
+    </style>
+</head>
+<body>
+     <div class="container">
+        <h3 id="target"></h3>
+        <img src="https://r.bing.com/rp/t-oHRyHjkwCYqr02mFH1-9pxZpc.png"  id="coin">
+        <br>
+
+        <div class="btn-con">
+        <button id="flipbtn">Flip Coin</button>
+        <button id="res">Reset</button>
+
+
+          
+        </div>
+        <h3 id="result"></h3>
+        
+        <div class="myendresult">
+        <p id="tailscore"></p>
+        <p id="headscore"></p>
+    </div>
+     </div>
+     <script>
+        const flipbtn = document.getElementById("flipbtn");
+        const res = document.getElementById("res");
+        const coin = document.getElementById("coin");
+        const result = document.getElementById("result");
+        const tailscore = document.getElementById("tailscore");
+        const headscore = document.getElementById("headscore");
+        const target = document.getElementById("target");
+
+       
+                  
+                  let player1 = prompt("Type the player name who want to be head in toss");
+                  let player2 = prompt("Type the player name who want to be tails in toss");
+                  let selectedtarget = prompt("Enter a tagret that how much time player should win toss. like most of the match the toss is done 3 times to get 1st choice in game ");
+           selectedtarget = Number(selectedtarget)
+                     
+                      
+                
+                  let count = 0;
+                  let headcore = 0;
+                  target.textContent =  "Target : " +selectedtarget
+                  flipbtn.onclick = function () {
+    let heads = 'https://r.bing.com/rp/IvgCsVNkTsbtItWdonrGOVaIoU4.png';
+    let tails = 'https://r.bing.com/rp/t-oHRyHjkwCYqr02mFH1-9pxZpc.png';
+    
+    let computerchoice = [heads, tails];
+    let winner = computerchoice[Math.floor(Math.random() * 2)];
+    coin.src = winner;
+    coin.classList.add("myanime");
+
+    if (winner === tails) {
+        count++;
+        tailscore.textContent = player2 + " :" + count;
+        result.textContent = 'Tails Winner';
+    } else if (winner === heads) {
+        headcore++;
+        headscore.textContent = player1 + " :" + headcore;
+        result.textContent = 'Heads Winner';
+    }
+
+    if (headcore == selectedtarget) {
+        target.textContent = player1 + ' is winner of the toss';
+    } else if (count == selectedtarget) {
+        target.textContent = player2 + ' is winner of the toss';
+    }
+}
+
+            res.onclick = function(){
+                           
+                           result.textContent = 'Start Match'
+
+                    headscore.textContent = player1+' : 0'    
+                    tailscore.textContent = player2+' : 0'
+
+                 }
+            
+     </script>
+</body>
+</html>
